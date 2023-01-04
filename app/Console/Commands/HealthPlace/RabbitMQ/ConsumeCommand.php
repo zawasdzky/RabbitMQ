@@ -13,6 +13,7 @@ use Illuminate\Console\Command;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use PhpAmqpLib\Message\AMQPMessage;
 use Psr\Log\LoggerInterface;
+use Illuminate\Support\Facades\Log;
 
 class ConsumeCommand extends Command
 {
@@ -34,6 +35,7 @@ class ConsumeCommand extends Command
                 try {
                     $payload = json_decode($message->getBody(), true, 512, JSON_THROW_ON_ERROR);
                     $this->validateMessage($payload);
+                    Log::info('Message received');
                     $logger->info('Message received', $payload);
                     $this->dispatch(new IngestDataJob($payload['filepath']));
                     $logger->info('Message handled.');
