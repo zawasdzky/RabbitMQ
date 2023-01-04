@@ -7,7 +7,7 @@ use App\Jobs\RabbitMQJob;
 use Illuminate\Http\{JsonResponse, Request, Response};
 use Illuminate\Support\Facades\DB;
 
-class AgeGateController extends Controller
+class UserController extends Controller
 {
     public function index()
     {
