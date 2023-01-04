@@ -35,7 +35,7 @@ class ConsumeCommand extends Command
                 try {
                     $payload = json_decode($message->getBody(), true, 512, JSON_THROW_ON_ERROR);
                     $this->validateMessage($payload);
-                    Log::info('Message received');
+                    //Log::info('Message received');
                     $logger->info('Message received', $payload);
                     $this->dispatch(new IngestDataJob($payload['filepath']));
                     $logger->info('Message handled.');
